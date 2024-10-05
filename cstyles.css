@@ -1,11 +1,16 @@
+a {
+  color: #FFFFFF; 
+  text-decoration: none; 
+  margin-top: 20px;
+}
 @font-face {
     font-family: 'Friends';
-    src: url('GABRWFFR.TTF'); /* Replace with the actual font file URL */
+    src: url('GABRWFFR.TTF');
     font-weight: normal;
     font-style: normal;
   }body {
     font-family: 'Friends', sans-serif;
-    background-color: #fff; /* Soft gray background */
+    background-color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,7 +19,7 @@
 }
 
 .form-container {
-    background-color: #FFFFFF; /* White background */
+    background-color: #FFFFFF;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
