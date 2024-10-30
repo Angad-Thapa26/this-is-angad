@@ -5,19 +5,7 @@
     font-style: normal;
 
   }
-   a {
-            text-decoration: none; 
-            color: inherit; 
-            cursor: pointer;
-
-        }
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 10;
-     button{
+ button{
         width: 165px;
         height: 62px;
         cursor: pointer;
@@ -50,6 +38,19 @@ body {
             transition: 0.5s;
 
          }
+   a {
+            text-decoration: none; 
+            color: inherit; 
+            cursor: pointer;
+
+        }
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 10;
+    
 
     a {
         text-decoration: none; 
