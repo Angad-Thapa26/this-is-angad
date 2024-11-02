@@ -14,9 +14,58 @@
             margin: 0;
         }
     </style>-->
+    <style>
+    /* Cloud-like box for Thought of the Day */
+    .thought-of-the-day {
+      background: #f0f8ff;
+      border-radius: 50px;
+      padding: 20px;
+      max-width: 600px;
+      margin: 50px auto;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      font-family: Arial, sans-serif;
+      text-align: center;
+      font-size: 1.2em;
+      color: #333;
+      position: relative;
+    }
+
+    /* Extra "cloud puffs" */
+    .thought-of-the-day::before,
+    .thought-of-the-day::after {
+      content: '';
+      position: absolute;
+      background: #f0f8ff;
+      border-radius: 50%;
+      z-index: -1;
+    }
+
+    /* Top cloud puff */
+    .thought-of-the-day::before {
+      width: 80px;
+      height: 80px;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Bottom cloud puff */
+    .thought-of-the-day::after {
+      width: 100px;
+      height: 100px;
+      bottom: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+  </style>
 </head>
 <body>
-    <div class="page" id="page1">
+    <div class="thought-of-the-day">
+    "HAPPY DIPAWALI"
+  </div>
+
     <p><a href="contact.html"  style="font-size: 25px; font-family: 'Friends', sans-serif;">Hello, Angad</a></p><br> 
        <a href="https://angad-thapa26.github.io/at/">
         <button>APPLY</button>
@@ -57,7 +106,6 @@
             rgba(2,245,255,1)100.2%);
             transition: 0.5s;
   </style>
-    </div>
     
         <!-- <p><a href="https://drive.google.com/file/d/1AUXxog3yiEk90jsCSzMaT4KjIJE6yQit/view?usp=sharing"  style="font-size: 40px; font-family: 'Friends', sans-serif; color: purple;">Perry's day</a></p> 
     <!-- this is a comment if you need to seperatea angad and hello angad <p style="font-family: 'Friends', sans-serif;">  Angad </p>-->
