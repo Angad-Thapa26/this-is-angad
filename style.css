@@ -58,4 +58,95 @@ body {
         cursor: pointer;
     }
 }
+.toggle-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    color: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+.toggle-button:hover {
+    transform: scale(1.2);
+}
+
+.social-icons {
+    display: center;
+    gap: 50px;
+    margin-bottom: 30px;
+}
+
+.icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 35px;
+    transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+    background: rgba(5, 5, 5, 0.1);
+}
+
+.icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.icon::before {
+    content: '';
+    position: absolute;
+    width: 300%;
+    height: 300%;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transition: transform 0.3s;
+    z-index: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+.icon:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.icon i {
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.icon.facebook { color: #3b5998; }
+.icon.twitter { color: #1da1f2; }
+.icon.instagram { color: #e1306c; }
+.icon.linkedin { color: #0077b5; }
+.icon.pinterest { color: #bd081c; }
+.icon.snapchat { color: #969448; }
+.icon.tiktok { color: #69c9d0; }
+.icon.reddit { color: #ff4500; }
+.icon.youtube { color: #ff0000; }
+.icon.whatsapp { color: #25d366; }
+.icon.discord { color: #7289da; }
+
+
+
+.icon:hover ~ .info-card {
+    opacity: 1;
+}
+
+
+.footer {
+    position: absolute;
+    bottom: 20px;
+    text-align: center;
+    width: 100%;
+    font-size: 0.8em;
+}
   
