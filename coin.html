@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Revealing Coin</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background: #1a1a2e;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .quote-box {
+            max-width: 600px;
+            text-align: center;
+            margin-bottom: 30px;
+            font-style: italic;
+            color: #8a8aa3;
+            transition: opacity 0.5s;
+        }
+
+        .coin-container {
+            perspective: 1000px;
+            margin: 40px;
+        }
+
+        .coin {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 3s ease-out;
+        }
+
+        .coin-inner {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .heads {
+            background: linear-gradient(45deg, #ffd700, #ffa500);
+            transform: rotateY(0deg);
+            border: 8px solid #B8860B;
+        }
+
+        .tails {
+            background: linear-gradient(45deg, #daa520, #cd853f);
+            transform: rotateY(180deg);
+            border: 8px solid #8B4513;
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .reflection {
+            max-width: 500px;
+            text-align: center;
+            margin-top: 20px;
+            min-height: 60px;
+            color: #ffd700;
+            font-size: 18px;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            min-width: 200px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .timer-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            color: #8a8aa3;
+        }
+
+        input {
+            width: 60px;
+            padding: 5px;
+            background: #2a2a3e;
+            border: 1px solid #4a4a5e;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        .desire-input {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .desire-input input {
+            width: 200px;
+            padding: 10px;
+            margin: 10px;
+            background: #2a2a3e;
+            border: 1px solid #4a4a5e;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        .hidden {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="quote-box">
+        "The coin doesn't decide your fate. It reveals the path your heart already knows."
+    </div>
+
+    <div class="desire-input">
+        <div>But! Before you flip, what outcome are you secretly hoping for?</div>
+        <input type="text" id="desiredOutcome" placeholder="heads or tails">
+    </div>
+
+    <div class="coin-container">
+        <div class="coin">
+            <div class="coin-inner heads">HEADS</div>
+            <div class="coin-inner tails">TAILS</div>
+        </div>
+    </div>
+
+    <div class="reflection" id="reflection"></div>
+
+    <div class="controls">
+        <div class="timer-control">
+            <label for="flipTime">Reflection time (seconds):</label>
+            <input type="number" id="flipTime" value="3" min="1" max="10" step="0.5">
+        </div>
+        <button onclick="flipCoin()">Flip & Reflect</button>
+        <button onclick="resetCoin()" style="background: linear-gradient(45deg, #666, #444);">Reset</button>
+    </div>
+
+    <audio id="flipSound" preload="auto">
+        <source src="data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4LjI5LjEwMAAAAAAAAAAAAAAA//OEAAAAAAAAAAAAAAAAAAAAAAAASW5mbwAAAA8AAAAEAAABIADAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV6urq6urq6urq6urq6urq6urq6urq6urq6v////////////////////////////////8AAAAATGF2YzU4LjU0AAAAAAAAAAAAAAAAJAAAAAAAAAAAASDs90hvAAAAAAAAAAAAAAAAAAAA//MUZAAAAAGkAAAAAAAAA0gAAAAATEFN//MUZAMAAAGkAAAAAAAAA0gAAAAARTMu//MUZAYAAAGkAAAAAAAAA0gAAAAAOTku//MUZAkAAAGkAAAAAAAAA0gAAAAANVVV" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const coin = document.querySelector('.coin');
+        const reflectionDiv = document.getElementById('reflection');
+        const flipSound = document.getElementById('flipSound');
+        const quoteBox = document.querySelector('.quote-box');
+        let isFlipping = false;
+
+        const reflections = [
+            "Notice your initial reaction. Is it telling you something?",
+            "Sometimes we need a coin to hear our inner voice.",
+            "The answer was within you all along.",
+            "Your heart knew before the coin landed.",
+            "What does your disappointment or joy reveal?",
+            "The coin simply mirrors your true desire."
+        ];
+
+        const duringFlipQuotes = [
+            "Listen to your heart as the coin spins...",
+            "Which side are you hoping for?",
+            "The moment of suspense reveals our true desires...",
+            "Let the coin help you discover your path..."
+        ];
+
+        function flipCoin() {
+            if (isFlipping) return;
+            
+            const desiredOutcome = document.getElementById('desiredOutcome').value.toLowerCase();
+            isFlipping = true;
+            reflectionDiv.style.opacity = '0';
+            
+            const flipTime = parseFloat(document.getElementById('flipTime').value);
+            const rotations = Math.floor(Math.random() * 5) + 5;
+            const result = Math.random() < 0.5 ? 'heads' : 'tails';
+            
+            let quoteIndex = 0;
+            const quoteInterval = setInterval(() => {
+                quoteBox.textContent = duringFlipQuotes[quoteIndex % duringFlipQuotes.length];
+                quoteIndex++;
+            }, 800);
+
+            const finalRotation = rotations * 360 + (result === 'tails' ? 180 : 0);
+            
+            coin.style.transition = `transform ${flipTime}s ease-out`;
+            coin.style.transform = `rotateY(${finalRotation}deg)`;
+            
+            flipSound.currentTime = 0;
+            flipSound.play();
+
+            setTimeout(() => {
+                clearInterval(quoteInterval);
+                quoteBox.textContent = '"The coin doesn\'t decide your fate. It reveals the path your heart already knows."';
+                
+                let reflection = reflections[Math.floor(Math.random() * reflections.length)];
+                if (desiredOutcome && (desiredOutcome === 'heads' || desiredOutcome === 'tails')) {
+                    if (desiredOutcome === result) {
+                        reflection = "You got what you hoped for! Notice that feeling of relief and confirmation.";
+                    } else {
+                        reflection = "Not what you hoped for? Your reaction reveals your true preference. Trust that feeling.";
+                    }
+                }
+                
+                reflectionDiv.textContent = reflection;
+                reflectionDiv.style.opacity = '1';
+                isFlipping = false;
+            }, flipTime * 1000);
+        }
+
+        function resetCoin() {
+            if (isFlipping) return;
+            coin.style.transition = 'none';
+            coin.style.transform = 'rotateY(0)';
+            reflectionDiv.style.opacity = '0';
+            document.getElementById('desiredOutcome').value = '';
+        }
+    </script>
+</body>
+</html>
