@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepali & English Website</title>
+    <style>
+        /* Import Nepali font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            display: grid;
+            gap: 20px;
+        }
+
+        .section {
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .nepali {
+            font-size: 1.1em; /* Slightly larger for better readability */
+        }
+
+        h1, h2 {
+            color: #274b48;
+            margin-bottom: 15px;
+        }
+
+        .language-toggle {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            position :center;
+            padding: 9px 16px;
+            cursor: pointer;
+            background-color: #7a68dfc2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="language-toggle">
+            <button onclick="toggleLanguage('english')">English</button>
+            <button onclick="toggleLanguage('nepali')">नेपाली</button>
+        </div>
+
+        <!-- Welcome Section -->
+        <div class="section">
+            <h1>Welcome / स्वागत छ</h1>
+            <p class="english">Welcome to the book.</p>
+            <p class="nepali">स्वागत छ।</p>
+        </div>
+
+        <!-- About Section -->
+        <div class="section">
+            <h2>About Us / हाम्रोबारे</h2>
+            <p class="english">We are dedicated to providing information in both English and Nepali languages to serve our diverse community.</p>
+            <p class="nepali">हाम्रो विविध समुदायलाई सेवा गर्न अङ्ग्रेजी र नेपाली दुवै भाषामा जानकारी प्रदान गर्न प्रतिबद्ध छौं।</p>
+        </div>
+        <div class="section">
+            <h2 class="english">Cold Tears</h2>
+            <p class="english">My heart began to melt and tears began to fall.
+                Heavy and burning, yet all those tears felt cool after all.
+                
+                I asked them, “Why aren't you hot, like the fire inside?”
+                They whispered, “We cooled ourselves as we rose to your eyes,
+                So we wouldn't hurt what holds her face
+                We left our heat behind, to keep her memories clear</p>
+        </div>
+        
+        <div class="section">
+            <h2 class="english">Rose</h2>
+            <p class="english">The rose saw her and pluck all its thorns</p>
+            </div>
+         <div class="section">
+            <p class="english">In the future, the greatest threat will be protecting your digital footprint, so think twice about what you consume and upload on the internet.
+            </p>
+            </div>
+
+        <div class="section">
+            <h2 class="nepali"> हाम्रोबारे</h2>
+            <p class="nepali">फभचय लबफभ षक ब क</p>
+        </div>
+        <div class="section">
+            <h2 class="nepali">हास्सो</h2>
+            <p class="nepali">  दिनभरि म हाँस्छु। रात बिस्तारै छिपिँदै जान्छ अनि मेरो छुट्टै संसार जमाउँदै जान्छु,हातमा कलम कापी हुन्छ ,कानमा बुचो इयरफोनको हुन्छ <br>मनमा या तिम्रो अनि कलममा व्याख्या तिम्रो हुन्छ। 
+            </p>
+        </div>
+        <div class="section">
+            <p class="nepali"> त्यस्तो भर गरेको माया त टुट्दो रहेछ यो टुटेको मायाको के भर
+            </p>
+        </div>
+        <div class="section">
+            <p class="nepali">  मनको सुन्दर मझेरीमा रुँदै बास माग्न आउने हरूलाई बार दिइसकेपछि बिहान उठेर हिँड्ने हरूका कारण नै प्रेममा खट लाग्दो रहेछ हुन त बास दिनेलाई मात्र बास दिनुको पीडा थाहा हुँदो रहेछ
+                <br>-bulbul</p>
+            </p>
+        </div>
+        <div class="section">
+            <h2 class="nepali"> आँखा </h2>
+            <p class="nepali">नदेखाए थाहा पाउँदैनन्
+                देखाए नाटक भन्छन्
+                मरे पछि कठै भन्छन ,
+                बाचुन्जेल कुरा काट्छन् !!!!
+                </p>
+        </div>
+        <div class="section">
+            <h2 class="nepali"> आगो </h2>
+            <p class="nepali">
+                निर्दोष आगोलाई के थाहा
+                खाना पकाउॅंदै छु कि लाश जलाउदैछु भनेर
+                </p>
+        </div>
+
+        <div class="section">
+            <h2 class="nepali"> पानी</h2>
+            <p class="nepali">पर्दैन जाने गए हुन्छ,
+                आउने आए हुन्छ,
+                के कुलो, के खोला,
+                पानीलाई बग्न पाए हुन्छ
+                </p>
+        </div>
+    </div>
+
+    <script>
+        function toggleLanguage(lang) {
+            const english = document.querySelectorAll('.english');
+            const nepali = document.querySelectorAll('.nepali');
+            
+            if (lang === 'english') {
+                english.forEach(el => el.style.display = 'block');
+                nepali.forEach(el => el.style.display = 'none');
+            } else {
+                english.forEach(el => el.style.display = 'none');
+                nepali.forEach(el => el.style.display = 'block');
+            }
+        }
+    </script>
+</body>
+</html>
